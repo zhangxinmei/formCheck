@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="tutorabc-form">
+        <div class="form-wrap">
+            <!-- form start -->
+            <div class="form-card">
+                <form>
+                    <div class="form-items">
+                        <div class="item">
+                            <input name="name" type="text" placeholder="姓名">
+                            <p class="error-msg"></p>
+                        </div>
+                        <div class="item">
+                            <input name="cphone" type="text" placeholder="手机">
+                            <p class="error-msg"></p>
+                        </div>
+                        <div class="item">
+                            <input name="active-code" type="text" placeholder="激活码">
+                            <p class="error-msg"></p>
+                        </div>
+                        <div class="item item-captcha">
+                            <div class="item-captcha-text">
+                                <input name="captcha" type="text" placeholder="验证码">
+                                <p class="error-msg captcha-error"></p>
+                            </div>
+                            <div class="item-captcha-btn">
+                                <input name="captcha-btn" class="btn captcha-btn" type="button" value="发送验证码">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <input name="submit" class="btn form-submit" type="button" value="提交">
+                            <div class="loading">
+                                <img src="./img/loading.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- form end -->
+            <!-- dialog-alert start -->
+            <div class="dialog-alert">
+                <div class="dialog-alert-bg"></div>
+                <div class="dialog-alert-wrap">
+                    <div class="dialog-alert-top">
+                        <p>提示</p>
+                        <span class="dialog-alert-del" title="关闭"></span>
+                    </div>
+                    <div class="dialog-alert-content">
+                        <p>
+                            您的信息有错
+                        </p>
+                    </div>
+                    <div class="dialog-alert-bottom">
+                        <div class="dialog-alert-del alert-bottom-btn">确定</div>
+                    </div>
+                </div>
+            </div>
+            <!-- dialog-alert end -->
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

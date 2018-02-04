@@ -1,0 +1,228 @@
+body,
+button,
+dd,
+div,
+dl,
+dt,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+input,
+li,
+ol,
+p,
+td,
+textarea,
+th,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+::-webkit-input-placeholder {
+    color: #999;
+}
+
+.error-msg {
+    display: none;
+    position: absolute;
+    top: 24%;
+    right: 12px;
+    color: #f74c4c;
+    font-size: 14px;
+    text-align: right;
+}
+
+.captcha-error {
+    right: 110px;
+}
+
+.show {
+    display: block;
+}
+
+.form-wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.form-card {
+    display: inline-block;
+    padding: 50px;
+    border-radius: 4px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+.form-item {
+    width: 240px
+}
+
+.form-items .item {
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.form-items .item:nth-child(4) {
+    position: relative;
+}
+
+.form-items input {
+    box-sizing: border-box;
+    padding: 12px 0 12px 10px;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    width: 100%;
+    border-radius: 5px;
+    color: #484848;
+    outline: none;
+
+}
+
+.form-items input.border-red {
+    border: 1px solid #f74c4c;
+}
+
+.form-items input.border-green {
+    border: 1px solid green;
+}
+
+.form-items .item-captcha {
+    font-size: 0;
+}
+
+.form-items .item-captcha .item-captcha-text {
+    display: inline-block;
+    font-size: 14px;
+    width: 60%;
+    margin-right: 5%;
+}
+
+.form-items .item-captcha .item-captcha-btn {
+    display: inline-block;
+    font-size: 14px;
+    width: 35%;
+
+}
+
+.form-items input.btn {
+    padding: 12px 0 12px 0;
+    background: #f74c4c;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.form-items .item-captcha-btn .captcha-btn {
+    width: 90px;
+}
+
+.form-items input.btn:hover {
+    background: #f11313;
+}
+
+.form-items .loading {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    margin-left: -14px;
+    width: 28px;
+}
+
+.form-items .loading img {
+    width: 100%;
+}
+
+.tutorabc-form .dialog-alert {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+.tutorabc-form .dialog-alert-bg{
+    width: 100%;
+    height: 100%;
+    background: #000;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+.tutorabc-form .dialog-alert-wrap{
+    max-width: 580px;
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    margin-left: -290px;
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+}
+.tutorabc-form .dialog-alert-top{
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #EDEDED;
+    padding-left: 30px;
+}
+.tutorabc-form .dialog-alert-top p{
+    color: #444;
+    font-size: 16px;
+}
+.tutorabc-form .dialog-alert-top .dialog-alert-del{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: url("../img/tiny-delete.png") no-repeat center center;
+}
+.tutorabc-form .dialog-alert-content{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 30px 40px 50px;
+    border-bottom: 1px solid #EDEDED;
+}
+.tutorabc-form .dialog-alert-bottom{
+    box-sizing: border-box;
+    padding: 36px 0;
+    background: #fafafa;          
+    position: relative;
+    width: 100%;
+}
+.tutorabc-form .dialog-alert-bottom .alert-bottom-btn{
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    margin-top: -18px;
+    width: 70px;
+    height: 36px;
+    line-height: 37px;
+    background-color: #F34D37;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
