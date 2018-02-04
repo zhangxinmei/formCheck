@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+    <style>
+        body,
+        button,
+        dd,
+        div,
+        dl,
+        dt,
+        form,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr,
+        input,
+        li,
+        ol,
+        p,
+        td,
+        textarea,
+        th,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #999;
+        }
+
+        .error-msg {
+            display: none;
+            position: absolute;
+            top: 24%;
+            right: 12px;
+            color: #f74c4c;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .captcha-error {
+            right: 110px;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .form-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            display: inline-block;
+            padding: 50px;
+            border-radius: 4px;
+            background-color: #fff;
+            -webkit-box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .2);
+            box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .2);
+        }
+
+        .form-item {
+            width: 240px
+        }
+
+        .form-items .item {
+            width: 100%;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-items .item:nth-child(4) {
+            position: relative;
+        }
+
+        .form-items input {
+            box-sizing: border-box;
+            padding: 12px 0 12px 10px;
+            background: #fff;
+            border: 1px solid #dcdcdc;
+            width: 100%;
+            border-radius: 5px;
+            color: #484848;
+            outline: none;
+
+        }
+
+        .form-items input.border-red {
+            border: 1px solid #f74c4c;
+        }
+
+        .form-items input.border-green {
+            border: 1px solid green;
+        }
+
+        .form-items .item-captcha {
+            font-size: 0;
+        }
+
+        .form-items .item-captcha .item-captcha-text {
+            display: inline-block;
+            font-size: 14px;
+            width: 60%;
+            margin-right: 5%;
+        }
+
+        .form-items .item-captcha .item-captcha-btn {
+            display: inline-block;
+            font-size: 14px;
+            width: 35%;
+
+        }
+
+        .form-items input.btn {
+            padding: 12px 0 12px 0;
+            background: #f74c4c;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form-items .item-captcha-btn .captcha-btn {
+            width: 90px;
+        }
+
+        .form-items input.btn:hover {
+            background: #f11313;
+        }
+
+        .form-items .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 50%;
+            margin-left: -14px;
+            width: 28px;
+        }
+
+        .form-items .loading img {
+            width: 100%;
+        }
+
+        .tutorabc-form .dialog-alert {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+        }
+        .tutorabc-form .dialog-alert-bg{
+            width: 100%;
+            height: 100%;
+            background: #000;
+            filter: alpha(opacity=50);
+            opacity: .5;
+        }
+        .tutorabc-form .dialog-alert-wrap{
+            max-width: 580px;
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            margin-left: -290px;
+            background: #fff;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .tutorabc-form .dialog-alert-top{
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #EDEDED;
+            padding-left: 30px;
+        }
+        .tutorabc-form .dialog-alert-top p{
+            color: #444;
+            font-size: 16px;
+        }
+        .tutorabc-form .dialog-alert-top .dialog-alert-del{
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: url("./img/tiny-delete.png") no-repeat center center;
+        }
+        .tutorabc-form .dialog-alert-content{
+            box-sizing: border-box;
+            width: 100%;
+            padding: 20px 30px 40px 50px;
+            border-bottom: 1px solid #EDEDED;
+        }
+        .tutorabc-form .dialog-alert-bottom{
+            box-sizing: border-box;
+            padding: 36px 0;
+            background: #fafafa;          
+            position: relative;
+            width: 100%;
+        }
+        .tutorabc-form .dialog-alert-bottom .alert-bottom-btn{
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            margin-top: -18px;
+            width: 70px;
+            height: 36px;
+            line-height: 37px;
+            background-color: #F34D37;
+            text-align: center;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tutorabc-form">
+        <div class="form-wrap">
+            <div class="form-card">
+                <form>
+                    <div class="form-items">
+                        <div class="item">
+                            <input name="name" type="text" placeholder="姓名">
+                            <p class="error-msg"></p>
+                        </div>
+                        <div class="item">
+                            <input name="cphone" type="text" placeholder="手机">
+                            <p class="error-msg"></p>
+                        </div>
+                        <div class="item">
+                            <input name="active-code" type="text" placeholder="激活码">
+                            <p class="error-msg"></p>
+                        </div>
+                        <div class="item item-captcha">
+                            <div class="item-captcha-text">
+                                <input name="captcha" type="text" placeholder="验证码">
+                                <p class="error-msg captcha-error"></p>
+                            </div>
+                            <div class="item-captcha-btn">
+                                <input name="captcha-btn" class="btn captcha-btn" type="button" value="发送验证码">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <input name="submit" class="btn form-submit" type="button" value="提交">
+                            <div class="loading">
+                                <img src="./img/loading.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="dialog-alert">
+                <div class="dialog-alert-bg"></div>
+                <div class="dialog-alert-wrap">
+                    <div class="dialog-alert-top">
+                        <p>提示</p>
+                        <span class="dialog-alert-del" title="关闭"></span>
+                    </div>
+                    <div class="dialog-alert-content">
+                        <p>
+                           您的信息有错
+                        </p>
+                    </div>
+                    <div class="dialog-alert-bottom">
+                        <div class="dialog-alert-del alert-bottom-btn">确定</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var check = {
+                regs: {
+                    name: /\b(^['A-Za-z0-9]{4,20}$)\b/,
+                    phone: /^1[3,4,5,6,7,8,9]{1}[0-9]{9}$/,
+                    activecode: /^[\u4E00-\u9FA5A-Za-z0-9]{6,20}$/,
+                    captcha: /^\d{6}$/
+                },
+                wait: 40,
+                get: {
+                    name: $("input[name='name']"),
+                    cphone: $("input[name='cphone']"),
+                    activecode: $("input[name='active-code']"),
+                    captcha: $("input[name='captcha']")
+                },
+                checkblur: function (obj, reg, msg, msg2) {
+                    if ($(obj).val() == '') {
+                        $(obj).siblings().addClass("show");
+                        $(obj).siblings().text(msg);
+                        $(obj).removeClass("border-green");
+                        $(obj).addClass("border-red");
+                    }
+                    else if (!reg.test($(obj).val())) {
+                        $(obj).siblings().addClass("show");
+                        $(obj).siblings().text(msg2);
+                        $(obj).removeClass("border-green");
+                        $(obj).addClass("border-red");
+                    } else {
+                        $(obj).removeClass("border-green");
+                    }
+                },
+                checkfoucs: function (obj, reg) {
+                    $(obj).siblings().removeClass("show");
+                    $(obj).removeClass("border-red");
+                    if (reg.test($(obj).val())) {
+                        $(obj).addClass("border-green");
+                    } else {
+                        $(obj).removeClass("border-green");
+                    }
+                },
+                checksubmit: function (id, reg, msg, msg2) {
+                    if ($("input[name='" + id + "']").val() == '') {
+                        $("input[name='" + id + "']").siblings().addClass("show");
+                        $("input[name='" + id + "']").siblings().text(msg);
+                        $("input[name='" + id + "']").addClass("border-red");
+                        return;
+                    }
+                    if (!reg.test($("input[name='" + id + "']").val())) {
+                        $("input[name='" + id + "']").siblings().addClass("show");
+                        $("input[name='" + id + "']").siblings().text(msg2);
+                        $("input[name='" + id + "']").addClass("border-red");
+                        return;
+                    }
+
+                },
+                timer: function (obj) {
+                    if (check.wait == 0) {
+                        obj.removeAttribute("disabled");
+                        obj.value = "获取验证码";
+                        check.wait = 40;
+                    } else {
+                        obj.setAttribute("disabled", true);
+                        obj.value = "重新发送 " + check.wait + "S";
+                        check.wait--;
+                        setTimeout(function () {
+                            check.timer(obj);
+                        },
+                            1000)
+                    }
+                }
+            }
+            // Check if the form loses focus
+            $("input:not('[type='button']')").on("blur", function () {
+                switch ($(this).attr("name")) {
+                    case "name":
+                        check.checkblur(this, check.regs.name, "姓名不能为空", "请输入正确名字");
+                        break;
+                    case "cphone":
+                        check.checkblur(this, check.regs.phone, "手机不能为空", "请输入正确手机号");
+                        break;
+                    case "active-code":
+                        check.checkblur(this, check.regs.activecode, "激活码不能为空", "请输入正确激活码");
+                        break;
+                    case "captcha":
+                        check.checkblur(this, check.regs.captcha, "验证码不能为空", "请输入正确验证码");
+                        break;
+
+                }
+            });
+            // Check if the form gets focus
+            $("input:not('[type='button']')").on("focus", function () {
+                switch ($(this).attr("name")) {
+                    case "name":
+                        check.checkfoucs(this, check.regs.name);
+                        break;
+                    case "cphone":
+                        check.checkfoucs(this, check.regs.phone);
+                        break;
+                    case "active-code":
+                        check.checkfoucs(this, check.regs.activecode);
+                        break;
+                    case "captcha":
+                        check.checkfoucs(this, check.regs.captcha);
+                        break;
+                }
+            });
+
+            // Check when the form submit
+            $(".form-submit").click(function () {
+                if (check.regs.name.test(check.get.name.val()) && check.regs.phone.test(check.get.cphone.val()) && check.regs.activecode.test(check.get.activecode.val()) && check.regs.captcha.test(check.get.captcha.val())) {
+                    $(this).attr("value", "");
+                    $(".loading").css("display", "block");
+                    setTimeout(function () {
+                        window.location.href = "https://www.baidu.com";
+                    }, 2000);
+
+                } else {
+                    check.checksubmit("name", check.regs.name, "姓名不能为空", "请输入正确名字");
+                    check.checksubmit("cphone", check.regs.phone, "手机不能为空", "请输入正确手机号");
+                    check.checksubmit("active-code", check.regs.activecode, "激活码不能为空", "请输入正确激活码");
+                    check.checksubmit("captcha", check.regs.captcha, "验证码不能为空", "请输入正确验证码");
+
+                }
+            });
+            // Check when obtaining the verification code
+            $(".captcha-btn").click(function () {
+                if (check.get.cphone.val() != '' && check.regs.phone.test(check.get.cphone.val()) && check.get.activecode.val() != '' && check.regs.activecode.test(check.get.activecode.val())) {
+                    check.timer(this);
+                } else {
+                    check.checksubmit("cphone", check.regs.phone, "手机不能为空", "请输入正确手机号");
+                    check.checksubmit("active-code", check.regs.activecode, "激活码不能为空", "请输入正确激活码");
+                }
+            });
+            // dialog alert
+            $(".dialog-alert-del").on("click",function(){
+                $(".dialog-alert").css("display","none");
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
